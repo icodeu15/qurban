@@ -243,12 +243,12 @@ export default async function HomePage() {
 
       <section id="kategori" className="px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <RevealOnScroll className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
+          <RevealOnScroll className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start">
+            <div className="max-w-2xl">
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#1F7A63]">Kategori</p>
               <h2 className="mt-2 font-serif text-4xl text-[#143C32]">{siteCopy.category_title}</h2>
             </div>
-            <p className="max-w-2xl text-sm leading-7 text-[#5F665E]">
+            <p className="max-w-xl text-sm leading-7 text-[#5F665E] lg:justify-self-end lg:pt-3">
               {siteCopy.category_description}
             </p>
           </RevealOnScroll>
@@ -258,12 +258,14 @@ export default async function HomePage() {
               const section = categorySectionMap[category];
               return (
                 <RevealOnScroll key={category} delay={index * 90}>
-                  <article className="category-card lift-card rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_70px_rgba(20,60,50,0.08)]">
+                  <article className="category-card lift-card flex h-full flex-col rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_70px_rgba(20,60,50,0.08)]">
                     <p className="inline-flex rounded-full bg-[#ECF6F1] px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-[#1F7A63]">
                       {section?.label ?? formatCategoryLabel(category)}
                     </p>
-                    <h3 className="mt-5 font-serif text-3xl text-[#143C32]">{section?.title ?? categoryMeta[category].title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-[#5F665E]">
+                    <h3 className="mt-5 min-h-[3.5rem] font-serif text-3xl leading-tight text-[#143C32]">
+                      {section?.title ?? categoryMeta[category].title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-7 text-[#5F665E]">
                       {section?.content ?? categoryMeta[category].description}
                     </p>
                   </article>
