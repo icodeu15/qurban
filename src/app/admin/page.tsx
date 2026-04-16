@@ -37,14 +37,8 @@ export default async function AdminPage() {
     return (
       <main className="pattern-bg min-h-screen px-6 py-16">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.15fr,0.85fr] lg:items-center">
-          <section className="space-y-6">
+          <section className="flex flex-col items-center justify-center space-y-6">
             <BrandLogo className="h-20 w-auto sm:h-24" priority />
-            <h1 className="font-serif text-5xl leading-tight text-[#143C32] sm:text-6xl">
-              Kelola landing page dengan cepat dan aman.
-            </h1>
-            <p className="max-w-2xl text-lg leading-8 text-[#5F665E]">
-              Login admin untuk memperbarui katalog hewan qurban, banner promo, dan paket aqiqah tanpa perlu deploy ulang.
-            </p>
           </section>
           <AdminLoginForm />
         </div>
