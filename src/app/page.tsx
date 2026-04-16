@@ -178,7 +178,7 @@ export default async function HomePage() {
       <header className="sticky top-0 z-40 px-4 py-3 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-[2rem] border border-white/70 bg-white/88 px-4 py-3 shadow-[0_12px_40px_rgba(20,60,50,0.08)] backdrop-blur sm:rounded-full md:px-5">
           <Link href="/" className="flex items-center">
-            <BrandLogo className="h-8 w-auto sm:h-11 lg:h-14" priority />
+            <BrandLogo className="h-6 w-auto sm:h-10 lg:h-12" priority />
           </Link>
           <nav className="hidden items-center gap-4 text-sm font-semibold text-[#35594E] md:flex">
             <Link href="#kategori" className="hover:text-[#1F7A63]">Kategori</Link>
