@@ -355,7 +355,6 @@ export default async function HomePage() {
                   <Link href="#kategori" className="hover:text-[#1F7A63]">Kategori Produk</Link>
                   <Link href="#produk" className="hover:text-[#1F7A63]">Katalog Pilihan</Link>
                   <Link href="#keunggulan" className="hover:text-[#1F7A63]">Keunggulan Layanan</Link>
-                  <Link href="/admin" className="hover:text-[#1F7A63]">Admin CMS</Link>
                 </div>
               </div>
 
