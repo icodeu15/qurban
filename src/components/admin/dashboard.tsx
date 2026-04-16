@@ -640,10 +640,9 @@ export function AdminDashboard({ initialProducts, initialBanners, initialSection
                 {categoryOptions.map((option) => <option key={option} value={option}>{option}</option>)}
               </Select>
             </div>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2">
               <TextInput value={productForm.price} onChange={(event) => setProductForm((current) => ({ ...current, price: event.target.value }))} placeholder="Harga" type="number" />
               <TextInput value={productForm.label} onChange={(event) => setProductForm((current) => ({ ...current, label: event.target.value }))} placeholder="Label" />
-              <TextInput value={productForm.sortOrder} onChange={(event) => setProductForm((current) => ({ ...current, sortOrder: event.target.value }))} placeholder="Urutan" type="number" />
             </div>
             <TextArea value={productForm.description} onChange={(event) => setProductForm((current) => ({ ...current, description: event.target.value }))} placeholder="Deskripsi singkat" />
             <div className="grid gap-4 md:grid-cols-[1fr,auto]">
