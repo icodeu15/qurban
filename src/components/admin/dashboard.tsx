@@ -4,7 +4,7 @@ import { FormEvent, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ImagePlus, LogOut, Pencil, RefreshCcw, Trash2 } from "lucide-react";
 
-import { siteCopyDefaults, siteCopyFields, type SiteCopyKey } from "@/lib/site-copy";
+import { siteCopyDefaults, siteCopyFields, type SiteCopyField, type SiteCopyGroup, type SiteCopyKey } from "@/lib/site-copy";
 import type { BannerRecord, ProductRecord, SectionRecord } from "@/lib/types";
 import { categoryOptions } from "@/lib/types";
 
@@ -229,11 +229,14 @@ export function AdminDashboard({ initialProducts, initialBanners, initialSection
     [sections],
   );
   const siteCopyGroups = useMemo(() => {
-    return siteCopyFields.reduce<Record<string, typeof siteCopyFields>>((accumulator, field) => {
-      accumulator[field.group] ??= [];
+    return siteCopyFields.reduce<Record<SiteCopyGroup, SiteCopyField[]>>((accumulator, field) => {
       accumulator[field.group].push(field);
       return accumulator;
-    }, {});
+    }, {
+      Hero: [],
+      Keunggulan: [],
+      Kategori: [],
+    });
   }, []);
 
   async function handleLogout() {

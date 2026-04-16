@@ -16,7 +16,9 @@ export const siteCopyFields = [
   { key: "category_description", label: "Deskripsi section kategori", group: "Kategori", type: "textarea", defaultValue: "Dibuat untuk pengunjung yang ingin cepat paham pilihan paket, kisaran harga, dan langsung lanjut chat tanpa harus bingung cari informasi ke banyak tempat." },
 ] as const;
 
+export type SiteCopyField = (typeof siteCopyFields)[number];
 export type SiteCopyKey = (typeof siteCopyFields)[number]["key"];
+export type SiteCopyGroup = (typeof siteCopyFields)[number]["group"];
 
 export const siteCopyDefaults: Record<SiteCopyKey, string> = Object.fromEntries(
   siteCopyFields.map((field) => [field.key, field.defaultValue]),
