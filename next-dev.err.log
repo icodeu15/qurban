@@ -1,0 +1,2149 @@
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="id" className="plus_jakar...">
+                          <body
+                            className="min-h-full flex flex-col"
+-                           data-new-gr-c-s-check-loaded="14.1283.0"
+-                           data-gr-ext-installed=""
+                          >
+                  ...
+ 
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3438:13)
+    at completeWork (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:131)
+    at completeUnitOfWork (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9622:23)
+    at performUnitOfWork (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9551:58)
+    at renderRootConcurrent (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9534:71)
+    at performWorkOnRoot (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3439:25)
+[browser] Image with src "/uploads/feed-nb.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+[browser] Image with src "/uploads/feed-nb-2.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_115brz8._.js:2431:13)
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+[browser] Uncaught Error: ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+    at <unknown> (Error: ./src/components/footer.tsx:3:1)
+    at <unknown> (Error: (./src/components/footer.tsx:3:1)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+⨯ ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+
+./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mMail[0m, [33mPhone[0m, [33mMapPin[0m, [33mFacebook[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mFooter[0m = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+[browser] Uncaught Error: ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx
+
+
+    at <unknown> (Error: ./src/components/footer.tsx:3:1)
+    at <unknown> (Error: (./src/components/footer.tsx:3:1)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Facebook doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Facebook was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Webhook?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Instagram doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+[browser] ./src/components/footer.tsx:3:1
+Export Twitter doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Link from "next/link";
+  5 |
+  6 | const Footer = () => {
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/components/footer.tsx
+    ./src/app/layout.tsx 
+    at handleErrors (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+    at processMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2834:28)
+    at <unknown> (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2679:13)
+    at WebSocket.handleMessage (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2324:17) (file://D:/Kerjaan/Vibe Coding/.next/dev/static/chunks/node_modules_next_dist_client_0pe1dg-._.js:2773:21)
+⨯ ReferenceError: Facebook is not defined
+    at Footer (src\components\footer.tsx:30:18)
+  28 |                 aria-label="Facebook"
+  29 |               >
+> 30 |                 <Facebook size={20} />
+     |                  ^
+  31 |               </a>
+  32 |               <a
+  33 |                 href="#" {
+  digest: '127711032'
+}
+⚠ Fast Refresh had to perform a full reload due to a runtime error.

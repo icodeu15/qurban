@@ -1,0 +1,29 @@
+
+> qurban-aqiqah-cms@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.169:3000
+- Environments: .env
+✓ Ready in 909ms
+Creating turbopack project { dir: 'D:\\Kerjaan\\Vibe Coding', testMode: true }
+
+ GET / 200 in 1059ms (next.js: 262ms, application-code: 797ms)
+✓ Compiled in 877ms
+✓ Compiled in 10.5s
+ GET / 500 in 1162ms (next.js: 959ms, application-code: 203ms)
+ GET / 500 in 48ms (next.js: 19ms, application-code: 29ms)
+ GET / 500 in 48ms (next.js: 34ms, application-code: 15ms)
+ GET / 500 in 32ms (next.js: 18ms, application-code: 13ms)
+ GET / 500 in 23ms (next.js: 10ms, application-code: 13ms)
+ GET / 500 in 25ms (next.js: 10ms, application-code: 15ms)
+ GET / 500 in 23ms (next.js: 10ms, application-code: 13ms)
+ GET / 500 in 23ms (next.js: 10ms, application-code: 14ms)
+ GET / 500 in 25ms (next.js: 10ms, application-code: 15ms)
+ GET / 500 in 29ms (next.js: 11ms, application-code: 17ms)
+✓ Compiled in 246ms
+ GET / 500 in 407ms (next.js: 69ms, application-code: 338ms)
+✓ Compiled in 109ms
+ GET / 200 in 393ms (next.js: 77ms, application-code: 316ms)
+[?25h
