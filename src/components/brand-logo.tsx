@@ -12,7 +12,7 @@ export function BrandLogo({
 }: BrandLogoProps) {
   return (
     <span
-      className={clsx("inline-flex h-[75px] w-auto shrink-0 items-center", className)}
+      className={clsx("inline-flex h-[60px] w-auto shrink-0 items-center", className)}
       aria-label="Niat Berqurban"
     >
       <Image
