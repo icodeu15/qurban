@@ -3,25 +3,36 @@ import clsx from "clsx";
 
 type BrandLogoProps = {
   className?: string;
-  width?: number;
-  height?: number;
   priority?: boolean;
 };
 
 export function BrandLogo({
   className,
-  width = 220,
-  height = 75,
   priority = false,
 }: BrandLogoProps) {
   return (
-    <Image
-      src="/brand/niat-berqurban-logo.svg"
-      alt="Niat Berqurban"
-      width={width}
-      height={height}
-      priority={priority}
-      className={clsx("h-auto w-auto", className)}
-    />
+    <span
+      className={clsx("inline-flex h-[75px] w-auto shrink-0 items-center", className)}
+      aria-label="Niat Berqurban"
+    >
+      <Image
+        src="/brand/niat-berqurban-logo-compact.png.tmp.png"
+        alt=""
+        aria-hidden="true"
+        width={553}
+        height={211}
+        priority={priority}
+        className="h-full w-auto sm:hidden"
+      />
+      <Image
+        src="/brand/niat-berqurban-logo-wide.png.tmp.png"
+        alt=""
+        aria-hidden="true"
+        width={515}
+        height={180}
+        priority={priority}
+        className="hidden h-full w-auto sm:block"
+      />
+    </span>
   );
 }

@@ -19,10 +19,27 @@ export function RevealOnScroll({ children, className, delay = 0 }: RevealOnScrol
       return;
     }
 
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      const mobileTimer = window.setTimeout(() => {
+        setVisible(true);
+      }, 0);
+      return () => window.clearTimeout(mobileTimer);
+    }
+
+    // Fallback so content never stays hidden if the observer fails to fire.
+    const fallbackTimer = window.setTimeout(() => {
+      setVisible(true);
+    }, 250 + delay);
+
+    if (typeof IntersectionObserver === "undefined") {
+      return () => window.clearTimeout(fallbackTimer);
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
+          window.clearTimeout(fallbackTimer);
           observer.disconnect();
         }
       },
@@ -30,8 +47,11 @@ export function RevealOnScroll({ children, className, delay = 0 }: RevealOnScrol
     );
 
     observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      window.clearTimeout(fallbackTimer);
+      observer.disconnect();
+    };
+  }, [delay]);
 
   return (
     <div

@@ -28,6 +28,10 @@ export function formatCategoryLabel(category: CategoryOption) {
 }
 
 export function buildProductCta(name: string, externalUrl?: string | null) {
+  if (externalUrl) {
+    return externalUrl;
+  }
+
   const message = `Halo, saya tertarik dengan ${name}`;
   const encoded = encodeURIComponent(message);
   const targetNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "6285190607229";

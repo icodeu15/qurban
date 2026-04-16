@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -9,10 +8,12 @@ import {
 
 import { BrandLogo } from "@/components/brand-logo";
 import { HeroBannerCarousel } from "@/components/hero-banner-carousel";
+import { ProductCatalog } from "@/components/product-catalog";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
-import { buildProductCta, buildWhatsAppLink, formatCategoryLabel, formatPrice } from "@/lib/format";
+import { buildWhatsAppLink, formatCategoryLabel } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
-import { CategoryOption, PublicBannerRecord } from "@/lib/types";
+import { buildSiteCopyMap } from "@/lib/site-copy";
+import { BannerRecord, CategoryOption, ProductRecord, PublicBannerRecord, SectionRecord } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
@@ -37,35 +38,76 @@ const categoryMeta: Record<CategoryOption, { title: string; description: string 
   },
 };
 
+function InstagramBrandIcon({ className = "size-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5.25" />
+      <circle cx="12" cy="12" r="4.1" />
+      <circle cx="17.3" cy="6.7" r="0.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function ShopeeBrandIcon({ className = "size-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M8.3 6.2a3.7 3.7 0 1 1 7.4 0h1.7c1.1 0 2 .9 2 2v9.2a2 2 0 0 1-2 2H6.6a2 2 0 0 1-2-2V8.2c0-1.1.9-2 2-2h1.7Zm1.8 0h3.8a1.9 1.9 0 1 0-3.8 0ZM12 10c-2.4 0-4 .9-4 2.6 0 1.6 1.2 2.2 3.6 2.6 1.7.3 2.1.6 2.1 1.1 0 .6-.7 1-1.8 1-1.2 0-2.2-.4-3.1-1.2l-1.2 1.5c1 .9 2.3 1.5 4.3 1.5 2.5 0 4.1-1.1 4.1-2.9 0-1.7-1.1-2.3-3.5-2.7-1.8-.3-2.2-.5-2.2-1.1 0-.5.6-.9 1.6-.9 1 0 1.8.3 2.7 1l1.1-1.6c-1-.8-2.1-1.2-3.7-1.2Z" />
+    </svg>
+  );
+}
+
+function TikTokBrandIcon({ className = "size-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M14.6 3c.4 2 1.6 3.5 3.7 4v2.7a7 7 0 0 1-3.3-1v5.2a5.8 5.8 0 1 1-5.7-5.8c.4 0 .8 0 1.2.1v2.9a2.8 2.8 0 1 0 1.7 2.6V3h2.4Z" />
+    </svg>
+  );
+}
+
 const socialMedia = [
   {
     label: "Instagram",
-    handle: "niatberqurban",
     href: "https://instagram.com/niatberqurban",
-    icon: CheckCircle2,
+    icon: InstagramBrandIcon,
   },
   {
     label: "Shopee",
-    handle: "niatberqurban",
     href: "https://shopee.co.id/niatberqurban",
-    icon: CheckCircle2,
+    icon: ShopeeBrandIcon,
   },
   {
     label: "TikTok",
-    handle: "niat.berqurban",
     href: "https://www.tiktok.com/@niat.berqurban",
-    icon: CheckCircle2,
+    icon: TikTokBrandIcon,
   },
 ];
 
-export default async function HomePage() {
-  const [banners, products, sections] = await Promise.all([
-    prisma.banner.findMany({ where: { isActive: true }, orderBy: { createdAt: "desc" } }),
-    prisma.product.findMany({ where: { isActive: true }, orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] }),
-    prisma.section.findMany({ where: { isActive: true }, orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] }),
-  ]);
+async function loadHomepageData(): Promise<{
+  banners: BannerRecord[];
+  products: ProductRecord[];
+  sections: SectionRecord[];
+}> {
+  try {
+    const [banners, products, sections] = await Promise.all([
+      prisma.banner.findMany({ where: { isActive: true }, orderBy: { createdAt: "desc" } }),
+      prisma.product.findMany({ where: { isActive: true }, orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] }),
+      prisma.section.findMany({ where: { isActive: true }, orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] }),
+    ]);
 
-  const banner = (banners[0] ?? null) as PublicBannerRecord | null;
+    return { banners, products, sections };
+  } catch (error) {
+    console.error("Failed to load homepage data from Prisma.", error);
+    return {
+      banners: [],
+      products: [],
+      sections: [],
+    };
+  }
+}
+
+export default async function HomePage() {
+  const { banners, products, sections } = await loadHomepageData();
+
   const heroBanners: PublicBannerRecord[] = banners.length
     ? (banners as PublicBannerRecord[])
     : [
@@ -91,23 +133,60 @@ export default async function HomePage() {
     }, {}),
   ) as [CategoryOption, typeof products][];
 
-  const featureSections = sections.filter((section) => section.kind === "feature");
-  const categorySections = sections.filter((section) => section.kind === "category");
+  const keunggulanSection = sections
+    .filter((section) => section.kind === "keunggulan")
+    .sort((first, second) => first.sortOrder - second.sortOrder)[0] ?? null;
+  const featureSections = sections
+    .filter((section) => section.kind === "feature")
+    .sort((first, second) => first.sortOrder - second.sortOrder);
+  const categorySections = sections
+    .filter((section) => section.kind === "category")
+    .sort((first, second) => first.sortOrder - second.sortOrder);
+  const siteCopy = buildSiteCopyMap(sections);
+  const categorySectionMap = (Object.keys(categoryMeta) as CategoryOption[]).reduce<Record<CategoryOption, (typeof categorySections)[number] | null>>(
+    (accumulator, category, index) => {
+      accumulator[category] = categorySections[index] ?? null;
+      return accumulator;
+    },
+    {
+      KAMBING: null,
+      SAPI: null,
+      KERBAU: null,
+      AQIQAH: null,
+    },
+  );
+  const heroHighlights = [
+    {
+      icon: ShieldCheck,
+      title: siteCopy.hero_highlight_1_title,
+      text: siteCopy.hero_highlight_1_text,
+    },
+    {
+      icon: Wallet,
+      title: siteCopy.hero_highlight_2_title,
+      text: siteCopy.hero_highlight_2_text,
+    },
+    {
+      icon: CheckCircle2,
+      title: siteCopy.hero_highlight_3_title,
+      text: siteCopy.hero_highlight_3_text,
+    },
+  ];
 
   return (
     <main className="pattern-bg">
       <header className="sticky top-0 z-40 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/70 bg-white/88 px-4 py-3 shadow-[0_12px_40px_rgba(20,60,50,0.08)] backdrop-blur md:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-[2rem] border border-white/70 bg-white/88 px-4 py-3 shadow-[0_12px_40px_rgba(20,60,50,0.08)] backdrop-blur sm:rounded-full md:px-5">
           <Link href="/" className="flex items-center">
-            <BrandLogo className="h-9 w-auto sm:h-10" priority />
+            <BrandLogo className="h-11 w-auto sm:h-14 lg:h-16" priority />
           </Link>
-          <nav className="hidden items-center gap-5 text-sm font-semibold text-[#35594E] md:flex">
+          <nav className="hidden items-center gap-4 text-sm font-semibold text-[#35594E] md:flex">
             <Link href="#kategori" className="hover:text-[#1F7A63]">Kategori</Link>
             <Link href="#produk" className="hover:text-[#1F7A63]">Produk</Link>
             <Link href="#keunggulan" className="hover:text-[#1F7A63]">Keunggulan</Link>
             <Link href="#kontak" className="hover:text-[#1F7A63]">Kontak</Link>
           </nav>
-          <Link href={buildWhatsAppLink("Halo, saya ingin konsultasi paket qurban dan aqiqah.")} target="_blank" className="btn-primary px-4 py-2">
+          <Link href={buildWhatsAppLink("Halo, saya ingin konsultasi paket qurban dan aqiqah.")} target="_blank" className="btn-primary shrink-0 px-4 py-2 text-sm sm:px-4">
             Hubungi WA
           </Link>
         </div>
@@ -115,19 +194,21 @@ export default async function HomePage() {
 
       <section className="hero-pattern px-4 pb-10 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="section-shell gold-ring overflow-hidden rounded-[2.5rem] border border-white/60 p-6 sm:p-8 lg:p-10">
+          <div className="section-shell gold-ring overflow-hidden rounded-[2.5rem] border border-white/60 p-5 sm:p-8 lg:p-10">
             <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[1.1fr,0.9fr] lg:items-center">
               <RevealOnScroll className="space-y-7">
-                <div className="inline-flex items-center gap-3 rounded-full border border-[#D8C79C] bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-[#1F7A63]">
-                  <BrandLogo className="h-8 w-auto" priority />
+                <div className="inline-flex w-fit max-w-full items-center gap-3 rounded-full border border-[#D8C79C]/70 bg-[#FCFAF5] px-4 py-2 text-xs font-semibold text-[#1F7A63] shadow-[0_10px_30px_rgba(20,60,50,0.08)] sm:text-sm">
+                  <span className="inline-flex size-8 items-center justify-center rounded-full bg-[#143C32] text-white">
+                    <CheckCircle2 className="size-4" />
+                  </span>
+                  <span className="leading-5">{siteCopy.hero_badge}</span>
                 </div>
                 <div className="space-y-5">
-                  <h1 className="max-w-4xl font-serif text-5xl leading-none text-[#143C32] text-balance sm:text-6xl lg:text-7xl">
-                    Jasa qurban dan aqiqah yang tampil profesional, terasa amanah, dan siap langsung closing lewat WhatsApp.
+                  <h1 className="max-w-4xl font-serif text-4xl leading-none text-[#143C32] text-balance sm:text-6xl lg:text-7xl">
+                    {siteCopy.hero_title}
                   </h1>
-                  <p className="max-w-2xl text-lg leading-8 text-[#5F665E]">
-                    Kami bantu keluarga, komunitas, dan panitia mendapatkan pilihan kambing, sapi, kerbau, serta paket
-                    aqiqah yang jelas harganya, rapi pelayanannya, dan nyaman dikonsultasikan tanpa ribet.
+                  <p className="max-w-2xl text-base leading-7 text-[#5F665E] sm:text-lg sm:leading-8">
+                    {siteCopy.hero_description}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">
@@ -140,23 +221,7 @@ export default async function HomePage() {
                   </Link>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-3">
-                  {[
-                    {
-                      icon: ShieldCheck,
-                      title: "Sesuai Syariat",
-                      text: "Seleksi hewan, proses, dan penyaluran dirancang untuk menjaga kepercayaan pelanggan.",
-                    },
-                    {
-                      icon: Wallet,
-                      title: "Harga Masuk Akal",
-                      text: "Pilihan paket dibuat realistis untuk keluarga, kolektif, hingga acara komunitas besar.",
-                    },
-                    {
-                      icon: CheckCircle2,
-                      title: "Pelayanan Amanah",
-                      text: "Komunikasi cepat, update jelas, dan semua arahan pembelian langsung diarahkan ke WhatsApp.",
-                    },
-                  ].map((item, index) => (
+                  {heroHighlights.map((item, index) => (
                     <RevealOnScroll key={item.title} delay={index * 120}>
                       <div className="lift-card rounded-[1.5rem] border border-white/70 bg-white/75 p-4">
                         <item.icon className="size-5 text-[#1F7A63]" />
@@ -181,24 +246,23 @@ export default async function HomePage() {
           <RevealOnScroll className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#1F7A63]">Kategori</p>
-              <h2 className="mt-2 font-serif text-4xl text-[#143C32]">Produk yang paling sering dicari pelanggan</h2>
+              <h2 className="mt-2 font-serif text-4xl text-[#143C32]">{siteCopy.category_title}</h2>
             </div>
             <p className="max-w-2xl text-sm leading-7 text-[#5F665E]">
-              Dibuat untuk pengunjung yang ingin cepat paham pilihan paket, kisaran harga, dan langsung lanjut chat
-              tanpa harus bingung cari informasi ke banyak tempat.
+              {siteCopy.category_description}
             </p>
           </RevealOnScroll>
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {(Object.keys(categoryMeta) as CategoryOption[]).map((category, index) => {
-              const section = categorySections.find((item) => item.category === category);
+              const section = categorySectionMap[category];
               return (
                 <RevealOnScroll key={category} delay={index * 90}>
                   <article className="category-card lift-card rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_70px_rgba(20,60,50,0.08)]">
                     <p className="inline-flex rounded-full bg-[#ECF6F1] px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-[#1F7A63]">
                       {section?.label ?? formatCategoryLabel(category)}
                     </p>
-                    <h3 className="mt-5 font-serif text-3xl text-[#143C32]">{categoryMeta[category].title}</h3>
+                    <h3 className="mt-5 font-serif text-3xl text-[#143C32]">{section?.title ?? categoryMeta[category].title}</h3>
                     <p className="mt-3 text-sm leading-7 text-[#5F665E]">
                       {section?.content ?? categoryMeta[category].description}
                     </p>
@@ -217,55 +281,19 @@ export default async function HomePage() {
               <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#1F7A63]">
-                    {formatCategoryLabel(category)}
+                    {categorySectionMap[category]?.label ?? formatCategoryLabel(category)}
                   </p>
                   <h2 className="mt-2 font-serif text-4xl text-[#143C32]">
                     Rekomendasi {formatCategoryLabel(category)} siap ditawarkan hari ini
                   </h2>
                 </div>
                 <p className="max-w-2xl text-sm leading-7 text-[#5F665E]">
-                  {categoryMeta[category].description}
+                  {categorySectionMap[category]?.content ?? categoryMeta[category].description}
                 </p>
               </div>
-
-              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                {items.map((product, index) => (
-                  <RevealOnScroll key={product.id} delay={index * 100}>
-                    <article className="lift-card overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 shadow-[0_20px_70px_rgba(20,60,50,0.08)]">
-                      <div className="relative aspect-[4/3] bg-[#F2EBDC]">
-                        <Image src={product.image ?? "/uploads/feed-nb.png"} alt={product.name} fill className="object-cover" />
-                      </div>
-                      <div className="space-y-4 p-6">
-                        <div className="flex items-start justify-between gap-3">
-                          <div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#1F7A63]">
-                              {formatCategoryLabel(product.category)}
-                            </p>
-                            <h3 className="mt-2 text-2xl font-semibold text-[#143C32]">{product.name}</h3>
-                          </div>
-                          <span className="rounded-full bg-[#143C32] px-3 py-1 text-xs font-semibold text-white">
-                            {product.label ?? "Pilihan utama"}
-                          </span>
-                        </div>
-                        <p className="text-sm leading-7 text-[#5F665E]">
-                          {product.description ??
-                            "Cocok untuk calon pembeli yang ingin proses praktis, harga jelas, dan respon cepat via WhatsApp."}
-                        </p>
-                        <div className="flex items-end justify-between gap-3">
-                          <div>
-                            <p className="text-xs uppercase tracking-[0.25em] text-[#6B705C]">Mulai dari</p>
-                            <p className="mt-1 font-serif text-4xl text-[#143C32]">{formatPrice(product.price)}</p>
-                          </div>
-                          <Link href={buildProductCta(product.name, product.externalUrl)} target="_blank" className="btn-primary">
-                            Tanya sekarang
-                            <ArrowUpRight className="size-4" />
-                          </Link>
-                        </div>
-                      </div>
-                    </article>
-                  </RevealOnScroll>
-                ))}
-              </div>
+              <RevealOnScroll delay={120}>
+                <ProductCatalog category={category} items={items} />
+              </RevealOnScroll>
             </RevealOnScroll>
           ))}
         </div>
@@ -275,13 +303,16 @@ export default async function HomePage() {
         <RevealOnScroll className="mx-auto max-w-7xl rounded-[2.5rem] border border-[#D8C79C] bg-[#143C32] px-6 py-8 text-white shadow-[0_28px_80px_rgba(20,60,50,0.22)] sm:px-8 lg:px-10">
           <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[0.85fr,1.15fr] lg:items-center">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#D8C79C]">Keunggulan</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#D8C79C]">
+                {keunggulanSection?.label || "Keunggulan"}
+              </p>
               <h2 className="mt-3 font-serif text-4xl text-white sm:text-5xl">
-                Website ini tampil seperti brand yang siap menerima order.
+                {siteCopy.keunggulan_title || keunggulanSection?.title || "Website ini tampil seperti brand yang siap menerima order."}
               </h2>
               <p className="mt-4 max-w-xl text-sm leading-7 text-white/75">
-                Setiap section dibuat untuk membangun rasa percaya, menjelaskan value, lalu mengarahkan pengunjung ke
-                percakapan WhatsApp secepat mungkin.
+                {siteCopy.keunggulan_description ||
+                  keunggulanSection?.content ||
+                  "Setiap section dibuat untuk membangun rasa percaya, menjelaskan value, lalu mengarahkan pengunjung ke percakapan WhatsApp secepat mungkin."}
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-3">
@@ -305,14 +336,9 @@ export default async function HomePage() {
 
       <footer id="kontak" className="px-4 pb-8 pt-6 sm:px-6 lg:px-8">
         <RevealOnScroll className="mx-auto max-w-7xl rounded-[2.2rem] border border-white/70 bg-white/85 px-6 py-8 shadow-[0_18px_60px_rgba(20,60,50,0.08)] sm:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1.2fr,0.8fr,0.9fr,1fr]">
+          <div className="grid gap-8 xl:grid-cols-[1.25fr,1fr] xl:items-start xl:gap-12">
             <div>
-              <BrandLogo className="h-11 w-auto" />
-              <p className="mt-4 max-w-md text-sm leading-7 text-[#5F665E]">
-                Katalog digital untuk bisnis qurban dan aqiqah yang serius terlihat profesional, mudah dipercaya, dan
-                siap dipakai untuk menerima pertanyaan calon pelanggan setiap hari.
-              </p>
-              <div className="mt-5">
+              <div>
                 <Link href={buildWhatsAppLink("Halo, saya ingin konsultasi pemesanan qurban atau aqiqah.")} target="_blank" className="btn-primary">
                   Chat WhatsApp
                   <ArrowUpRight className="size-4" />
@@ -320,56 +346,60 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#1F7A63]">Navigasi</p>
-              <div className="mt-4 flex flex-col gap-3 text-sm text-[#5F665E]">
-                <Link href="#kategori" className="hover:text-[#1F7A63]">Kategori Produk</Link>
-                <Link href="#produk" className="hover:text-[#1F7A63]">Katalog Pilihan</Link>
-                <Link href="#keunggulan" className="hover:text-[#1F7A63]">Keunggulan Layanan</Link>
-                <Link href="/admin" className="hover:text-[#1F7A63]">Admin CMS</Link>
+            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#1F7A63]">Navigasi</p>
+                <div className="mt-4 flex flex-col gap-3 text-sm text-[#5F665E]">
+                  <Link href="#kategori" className="hover:text-[#1F7A63]">Kategori Produk</Link>
+                  <Link href="#produk" className="hover:text-[#1F7A63]">Katalog Pilihan</Link>
+                  <Link href="#keunggulan" className="hover:text-[#1F7A63]">Keunggulan Layanan</Link>
+                  <Link href="/admin" className="hover:text-[#1F7A63]">Admin CMS</Link>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#1F7A63]">Kontak</p>
-              <div className="mt-4 space-y-3 text-sm text-[#5F665E]">
-                <p className="font-semibold text-[#143C32]">WhatsApp utama</p>
-                <p>{whatsappNumberDisplay}</p>
-                <p className="text-xs leading-6 text-[#6E746C]">
-                  Semua tombol konsultasi, pemesanan, dan follow up diarahkan langsung ke nomor ini.
-                </p>
-                <Link href={buildWhatsAppLink("Halo, saya mau konsultasi paket yang paling cocok.")} target="_blank" className="btn-outline w-fit">
-                  Konsultasi sekarang
-                </Link>
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#1F7A63]">Kontak</p>
+                <div className="mt-4 space-y-3 text-sm text-[#5F665E]">
+                  <p className="font-semibold text-[#143C32]">WhatsApp utama</p>
+                  <p>{whatsappNumberDisplay}</p>
+                  <p className="text-xs leading-6 text-[#6E746C]">
+                    Semua tombol konsultasi, pemesanan, dan follow up diarahkan langsung ke nomor ini.
+                  </p>
+                  <Link href={buildWhatsAppLink("Halo, saya mau konsultasi paket yang paling cocok.")} target="_blank" className="btn-outline w-fit">
+                    Konsultasi sekarang
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#1F7A63]">Sosial Media</p>
-              <div className="mt-4 space-y-3">
-                {socialMedia.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-3 rounded-2xl border border-[#EFE6CF] bg-[#FCFAF5] px-4 py-3 text-sm text-[#5F665E] hover:border-[#D8C79C] hover:bg-white"
-                  >
-                    <item.icon className="size-4 text-[#1F7A63]" />
-                    <span className="font-semibold text-[#143C32]">{item.label}</span>
-                    <span className="text-[#6E746C]">@{item.handle}</span>
-                  </a>
-                ))}
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#1F7A63]">Sosial Media</p>
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  {socialMedia.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-12 min-w-12 items-center justify-center rounded-2xl border border-[#EFE6CF] bg-[#FCFAF5] px-3 text-[#143C32] transition hover:-translate-y-0.5 hover:border-[#D8C79C] hover:bg-white"
+                      aria-label={item.label}
+                      title={item.label}
+                    >
+                      <item.icon className="size-5 text-[#1F7A63]" />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-8 flex flex-col gap-3 border-t border-[#E9E1CB] pt-5 text-xs text-[#6E746C] sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2026 Niat Berqurban. Siap dipakai sebagai landing page bisnis qurban & aqiqah.</p>
-            <p>Semua arahan penjualan utama melalui WhatsApp {whatsappNumberDisplay}.</p>
+          <div className="mt-8 flex flex-col gap-2 border-t border-[#E9E1CB] pt-5 text-xs text-[#6E746C] sm:flex-row sm:items-center sm:justify-between">
+            <p>© 2026 Niat Berqurban.</p>
+            <p className="sm:text-right">Semua arahan penjualan utama melalui WhatsApp {whatsappNumberDisplay}.</p>
           </div>
         </RevealOnScroll>
       </footer>
     </main>
   );
 }
+
+
