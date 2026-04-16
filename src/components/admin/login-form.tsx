@@ -51,7 +51,7 @@ export function AdminLoginForm() {
         <span className="text-sm font-medium text-[#143C32]">Username</span>
         <div className="flex items-center gap-3 rounded-2xl border border-[#D8C79C] bg-[#FCFAF5] px-4 py-3">
           <UserRound className="size-4 text-[#1F7A63]" />
-          <input name="username" type="text" placeholder="admin" className="w-full bg-transparent text-sm outline-none" required />
+          <input name="username" type="text" placeholder="Masukkan username" className="w-full bg-transparent text-sm outline-none" required />
         </div>
       </label>
 
@@ -59,7 +59,7 @@ export function AdminLoginForm() {
         <span className="text-sm font-medium text-[#143C32]">Password</span>
         <div className="flex items-center gap-3 rounded-2xl border border-[#D8C79C] bg-[#FCFAF5] px-4 py-3">
           <LockKeyhole className="size-4 text-[#1F7A63]" />
-          <input name="password" type="password" placeholder="admin123" className="w-full bg-transparent text-sm outline-none" required />
+          <input name="password" type="password" placeholder="Masukkan password" className="w-full bg-transparent text-sm outline-none" required />
         </div>
       </label>
 
