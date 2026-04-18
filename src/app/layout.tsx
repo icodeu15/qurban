@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   description: "Landing page dan CMS untuk katalog qurban dan aqiqah modern.",
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
+    shortcut: "/favicon-square.png",
+    apple: "/favicon-square.png",
   },
 };
 
