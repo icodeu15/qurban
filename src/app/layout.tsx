@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   title: "Niat Berqurban & Aqiqah",
   description: "Landing page dan CMS untuk katalog qurban dan aqiqah modern.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-square.png",
-    apple: "/favicon-square.png",
+    icon: "/brand/niat-berqurban-logo.svg",
+    shortcut: "/brand/niat-berqurban-logo.svg",
+    apple: "/brand/niat-berqurban-logo.svg",
   },
 };
 
